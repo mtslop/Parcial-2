@@ -3,18 +3,6 @@ package co.uniquindio.edu.poo.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import co.uniquindio.edu.poo.model.InstalacionRedFactory;
-import co.uniquindio.edu.poo.model.MantenimientoCorrectivoFactory;
-import co.uniquindio.edu.poo.model.MantenimientoPreventivoFactory;
-import co.uniquindio.edu.poo.model.RecuperacionInformacionFactory;
-import co.uniquindio.edu.poo.model.ServicioBaseFactory;
-import co.uniquindio.edu.poo.model.PaqueteTecnologico;
-import co.uniquindio.edu.poo.model.ServicioBase;
-import co.uniquindio.edu.poo.model.LegacySupport;
-import co.uniquindio.edu.poo.model.LegacySupportConversor;
-
-
 public class TechSolutions {
 
     private static TechSolutions instancia;
