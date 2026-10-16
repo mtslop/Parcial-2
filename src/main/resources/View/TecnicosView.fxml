@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<HBox spacing="20" style="-fx-background-color: #0E0E0F; -fx-padding: 20px;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+
+    <VBox spacing="12" prefWidth="430" minWidth="380" style="-fx-background-color: #390007; -fx-padding: 18px; -fx-background-radius: 12px;">
+        <Label text="Disponibilidad de Técnicos (LegacySupport)" wrapText="true" style="-fx-text-fill: #F0F4F5; -fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" />
+        <Label text="ESPECIALIDAD" style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" />
+        <ComboBox fx:id="cmbEspecialidad" promptText="Seleccione una especialidad" maxWidth="Infinity" style="-fx-base: #0E0E0F; -fx-background-color: #0E0E0F; -fx-border-color: #9BA0AB; -fx-border-radius: 6px; -fx-background-radius: 6px;" />
+        <Button text="Consultar Disponibilidad" onAction="#onConsultarTecnico" maxWidth="Infinity" style="-fx-background-color: #F0F4F5; -fx-text-fill: #390007; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 9px 18px; -fx-cursor: hand;" />
+        <Separator style="-fx-background-color: #9BA0AB;" />
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Técnico:" prefWidth="120" style="-fx-text-fill: #9BA0AB;" />
+            <Label fx:id="lblTecnicoId" text="-" style="-fx-text-fill: #F0F4F5; -fx-font-weight: bold;" />
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Nombre:" prefWidth="120" style="-fx-text-fill: #9BA0AB;" />
+            <Label fx:id="lblTecnicoNombre" text="-" style="-fx-text-fill: #F0F4F5; -fx-font-weight: bold;" />
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Especialidad:" prefWidth="120" style="-fx-text-fill: #9BA0AB;" />
+            <Label fx:id="lblTecnicoEspecialidad" text="-" style="-fx-text-fill: #F0F4F5; -fx-font-weight: bold;" />
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Estado:" prefWidth="120" style="-fx-text-fill: #9BA0AB;" />
+            <Label fx:id="lblTecnicoDisponibilidad" text="-" style="-fx-text-fill: #F0F4F5; -fx-font-weight: bold;" />
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Desplazamiento:" prefWidth="120" style="-fx-text-fill: #9BA0AB;" />
+            <Label fx:id="lblTecnicoDesplazamiento" text="-" style="-fx-text-fill: #F0F4F5; -fx-font-weight: bold;" />
+        </HBox>
+    </VBox>
+
+    <VBox spacing="12" HBox.hgrow="ALWAYS" style="-fx-background-color: #390007; -fx-padding: 18px; -fx-background-radius: 12px;">
+        <Label text="Costo Total de la Solicitud" style="-fx-text-fill: #F0F4F5; -fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" />
+        <Label text="SOLICITUD" style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" />
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <ComboBox fx:id="cmbSolicitud" promptText="Seleccione una solicitud" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-base: #0E0E0F; -fx-background-color: #0E0E0F; -fx-border-color: #9BA0AB; -fx-border-radius: 6px; -fx-background-radius: 6px;" />
+            <Button text="Verificar y Calcular" onAction="#onCalcularCosto" style="-fx-background-color: #F0F4F5; -fx-text-fill: #390007; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 8px 18px; -fx-cursor: hand;" />
+        </HBox>
+        <Label fx:id="lblEstado" text="" wrapText="true" style="-fx-text-fill: #9BA0AB; -fx-font-style: italic;" />
+
+        <Label text="DESGLOSE" style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" />
+        <TextArea fx:id="txtDesglose" editable="false" wrapText="true" VBox.vgrow="ALWAYS" style="-fx-control-inner-background: #0E0E0F; -fx-text-fill: #F0F4F5; -fx-background-color: #0E0E0F; -fx-border-color: #9BA0AB; -fx-border-radius: 6px; -fx-background-radius: 6px;" />
+        <Separator style="-fx-background-color: #9BA0AB;" />
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Servicios y paquetes:" prefWidth="170" style="-fx-text-fill: #9BA0AB;" />
+            <Label fx:id="lblSubtotal" text="\$0" style="-fx-text-fill: #F0F4F5; -fx-font-weight: bold;" />
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Desplazamiento:" prefWidth="170" style="-fx-text-fill: #9BA0AB;" />
+            <Label fx:id="lblDesplazamiento" text="\$0" style="-fx-text-fill: #F0F4F5; -fx-font-weight: bold;" />
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Total:" prefWidth="170" style="-fx-text-fill: #F0F4F5; -fx-font-size: 15px;" />
+            <Label fx:id="lblTotal" text="\$0" style="-fx-text-fill: #F0F4F5; -fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" />
+        </HBox>
+    </VBox>
+</HBox>

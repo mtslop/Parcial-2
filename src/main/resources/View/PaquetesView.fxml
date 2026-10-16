@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<HBox spacing="20" style="-fx-background-color: #0E0E0F; -fx-padding: 20px;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+
+    <VBox spacing="20" prefWidth="400" minWidth="340">
+        <VBox spacing="12" style="-fx-background-color: #390007; -fx-padding: 18px; -fx-background-radius: 12px;">
+            <Label text="Nuevo Paquete Tecnológico" style="-fx-text-fill: #F0F4F5; -fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" />
+            <TextField fx:id="txtCodigo" promptText="Código (Ej: PAQ-001)" style="-fx-background-color: #0E0E0F; -fx-text-fill: #F0F4F5; -fx-prompt-text-fill: #9BA0AB; -fx-background-radius: 6px; -fx-border-color: #9BA0AB; -fx-border-radius: 6px;" />
+            <TextField fx:id="txtNombre" promptText="Nombre del paquete" style="-fx-background-color: #0E0E0F; -fx-text-fill: #F0F4F5; -fx-prompt-text-fill: #9BA0AB; -fx-background-radius: 6px; -fx-border-color: #9BA0AB; -fx-border-radius: 6px;" />
+            <TextField fx:id="txtDescripcion" promptText="Descripción" style="-fx-background-color: #0E0E0F; -fx-text-fill: #F0F4F5; -fx-prompt-text-fill: #9BA0AB; -fx-background-radius: 6px; -fx-border-color: #9BA0AB; -fx-border-radius: 6px;" />
+            <Button text="Crear Paquete" onAction="#onCrearPaquete" style="-fx-background-color: #F0F4F5; -fx-text-fill: #390007; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 8px 18px; -fx-cursor: hand;" />
+            <Label fx:id="lblMensajePaquete" text="" wrapText="true" style="-fx-text-fill: #9BA0AB; -fx-font-style: italic;" />
+        </VBox>
+
+        <VBox spacing="12" VBox.vgrow="ALWAYS" style="-fx-background-color: #390007; -fx-padding: 18px; -fx-background-radius: 12px;">
+            <Label text="Paquetes Configurados" style="-fx-text-fill: #F0F4F5; -fx-font-size: 16px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" />
+            <ListView fx:id="lstPaquetes" VBox.vgrow="ALWAYS" style="-fx-base: #390007; -fx-control-inner-background: #0E0E0F; -fx-background-color: #0E0E0F; -fx-selection-bar: #9BA0AB; -fx-selection-bar-non-focused: #9BA0AB;" />
+        </VBox>
+    </VBox>
+
+    <VBox spacing="12" HBox.hgrow="ALWAYS" style="-fx-background-color: #390007; -fx-padding: 18px; -fx-background-radius: 12px;">
+        <Label text="Componentes del Paquete" style="-fx-text-fill: #F0F4F5; -fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" />
+        <Label text="PAQUETE SELECCIONADO" style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" />
+        <Label fx:id="lblPaqueteSeleccionado" text="Seleccione un paquete de la lista" wrapText="true" style="-fx-text-fill: #F0F4F5; -fx-font-size: 14px; -fx-font-weight: bold;" />
+        <Separator style="-fx-background-color: #9BA0AB;" />
+
+        <Label text="AGREGAR COMPONENTE (servicio, servicio personalizado u otro paquete)" style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" />
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <ComboBox fx:id="cmbComponente" promptText="Seleccione un componente" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-base: #0E0E0F; -fx-background-color: #0E0E0F; -fx-border-color: #9BA0AB; -fx-border-radius: 6px; -fx-background-radius: 6px;" />
+            <Button text="Agregar" onAction="#onAgregarComponente" style="-fx-background-color: #F0F4F5; -fx-text-fill: #390007; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 8px 18px; -fx-cursor: hand;" />
+        </HBox>
+        <Label fx:id="lblMensajeComponente" text="" wrapText="true" style="-fx-text-fill: #9BA0AB; -fx-font-style: italic;" />
+
+        <TreeView fx:id="treeComponentes" VBox.vgrow="ALWAYS" style="-fx-base: #390007; -fx-control-inner-background: #0E0E0F; -fx-background-color: #0E0E0F; -fx-selection-bar: #9BA0AB; -fx-selection-bar-non-focused: #9BA0AB;" />
+
+        <Separator style="-fx-background-color: #9BA0AB;" />
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="Costo total del paquete:" style="-fx-text-fill: #F0F4F5; -fx-font-size: 15px;" />
+            <Label fx:id="lblCostoPaquete" text="\$0" style="-fx-text-fill: #F0F4F5; -fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" />
+        </HBox>
+    </VBox>
+</HBox>

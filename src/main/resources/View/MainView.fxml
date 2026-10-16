@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane prefHeight="780" prefWidth="1200" style="-fx-background-color: #0E0E0F; -fx-base: #0E0E0F; -fx-accent: #390007; -fx-focus-color: #9BA0AB; -fx-faint-focus-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <HBox alignment="CENTER_LEFT" style="-fx-background-color: #390007; -fx-padding: 18px 28px;">
+            <VBox spacing="2">
+                <Label text="TechSolutions" style="-fx-text-fill: #F0F4F5; -fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" />
+                <Label text="Gestión de servicios, paquetes tecnológicos y solicitudes" style="-fx-text-fill: #9BA0AB; -fx-font-size: 12px;" />
+            </VBox>
+        </HBox>
+    </top>
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE" style="-fx-tab-min-height: 38px; -fx-background-color: #0E0E0F;">
+            <Tab text="Servicios">
+                <fx:include source="ServiciosView.fxml" />
+            </Tab>
+            <Tab text="Paquetes">
+                <fx:include source="PaquetesView.fxml" />
+            </Tab>
+            <Tab text="Solicitudes">
+                <fx:include source="SolicitudesView.fxml" />
+            </Tab>
+            <Tab text="Técnicos y Costos">
+                <fx:include source="TecnicosView.fxml" />
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>
