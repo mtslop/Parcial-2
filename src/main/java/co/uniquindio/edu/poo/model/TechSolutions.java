@@ -12,6 +12,7 @@ public class TechSolutions {
     private List<Cliente> listaClientes;
     private List<ServicioBase> catalogo;
     private List<PaqueteTecnologico> listaPaquetes;
+    private List<Tecnico>listaTecnicos;
     private GestorSolicitudes gestor;
     private int contadorSolicitudes;
 
@@ -23,6 +24,7 @@ public class TechSolutions {
         this.listaPaquetes = new ArrayList<>();
         this.gestor = new GestorSolicitudes(new LegacySupportConversor(new LegacySupport()));
         this.contadorSolicitudes = 0;
+        this.listaTecnicos=new ArrayList<>();
         cargarDatosIniciales();
     }
 
@@ -152,5 +154,18 @@ public class TechSolutions {
 
     public GestorSolicitudes getGestor() {
         return gestor;
+    }
+
+    public List<Tecnico> getListaTecnicos() {
+        return listaTecnicos;
+    }
+
+    public void setListaTecnicos(List<Tecnico> listaTecnicos) {
+        this.listaTecnicos = listaTecnicos;
+    }
+    public void agregarTecnico(Tecnico tecnico) {
+        if (tecnico != null && !listaTecnicos.contains(tecnico)) {
+            listaTecnicos.add(tecnico);
+        }
     }
 }
