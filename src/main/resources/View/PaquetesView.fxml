@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox spacing="20" style="-fx-background-color: #0E0E0F; -fx-padding: 20px;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.edu.poo.viewcontroller.PaquetesViewController">
+
+    <VBox minWidth="340" prefWidth="400" spacing="20">
+        <VBox spacing="12" style="-fx-background-color: #390007; -fx-padding: 18px; -fx-background-radius: 12px;">
+            <Label style="-fx-text-fill: #F0F4F5; -fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="Nuevo Paquete Tecnológico" />
+            <TextField fx:id="txtCodigo" promptText="Código (Ej: PAQ-001)" style="-fx-background-color: #0E0E0F; -fx-text-fill: #F0F4F5; -fx-prompt-text-fill: #9BA0AB; -fx-background-radius: 6px; -fx-border-color: #9BA0AB; -fx-border-radius: 6px;" />
+            <TextField fx:id="txtNombre" promptText="Nombre del paquete" style="-fx-background-color: #0E0E0F; -fx-text-fill: #F0F4F5; -fx-prompt-text-fill: #9BA0AB; -fx-background-radius: 6px; -fx-border-color: #9BA0AB; -fx-border-radius: 6px;" />
+            <TextField fx:id="txtDescripcion" promptText="Descripción" style="-fx-background-color: #0E0E0F; -fx-text-fill: #F0F4F5; -fx-prompt-text-fill: #9BA0AB; -fx-background-radius: 6px; -fx-border-color: #9BA0AB; -fx-border-radius: 6px;" />
+            <Button onAction="#onCrearPaquete" style="-fx-background-color: #F0F4F5; -fx-text-fill: #390007; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 8px 18px; -fx-cursor: hand;" text="Crear Paquete" />
+            <Label fx:id="lblMensajePaquete" style="-fx-text-fill: #9BA0AB; -fx-font-style: italic;" text="" wrapText="true" />
+        </VBox>
+
+        <VBox spacing="12" style="-fx-background-color: #390007; -fx-padding: 18px; -fx-background-radius: 12px;" VBox.vgrow="ALWAYS">
+            <Label style="-fx-text-fill: #F0F4F5; -fx-font-size: 16px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="Paquetes Configurados" />
+            <ListView fx:id="lstPaquetes" style="-fx-base: #390007; -fx-control-inner-background: #0E0E0F; -fx-background-color: #0E0E0F; -fx-selection-bar: #9BA0AB; -fx-selection-bar-non-focused: #9BA0AB;" VBox.vgrow="ALWAYS" />
+        </VBox>
+    </VBox>
+
+    <VBox spacing="12" style="-fx-background-color: #390007; -fx-padding: 18px; -fx-background-radius: 12px;" HBox.hgrow="ALWAYS">
+        <Label style="-fx-text-fill: #F0F4F5; -fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="Componentes del Paquete" />
+        <Label style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" text="PAQUETE SELECCIONADO" />
+        <Label fx:id="lblPaqueteSeleccionado" style="-fx-text-fill: #F0F4F5; -fx-font-size: 14px; -fx-font-weight: bold;" text="Seleccione un paquete de la lista" wrapText="true" />
+        <Separator style="-fx-background-color: #9BA0AB;" />
+
+        <Label style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" text="AGREGAR COMPONENTE (servicio, servicio personalizado u otro paquete)" />
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <ComboBox fx:id="cmbComponente" maxWidth="Infinity" promptText="Seleccione un componente" style="-fx-base: #0E0E0F; -fx-background-color: #0E0E0F; -fx-border-color: #9BA0AB; -fx-border-radius: 6px; -fx-background-radius: 6px;" HBox.hgrow="ALWAYS" />
+            <Button onAction="#onAgregarComponente" style="-fx-background-color: #F0F4F5; -fx-text-fill: #390007; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 8px 18px; -fx-cursor: hand;" text="Agregar" />
+        </HBox>
+        <Label fx:id="lblMensajeComponente" style="-fx-text-fill: #9BA0AB; -fx-font-style: italic;" text="" wrapText="true" />
+
+        <TreeView fx:id="treeComponentes" style="-fx-base: #390007; -fx-control-inner-background: #0E0E0F; -fx-background-color: #0E0E0F; -fx-selection-bar: #9BA0AB; -fx-selection-bar-non-focused: #9BA0AB;" VBox.vgrow="ALWAYS" />
+
+        <Separator style="-fx-background-color: #9BA0AB;" />
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <Label style="-fx-text-fill: #F0F4F5; -fx-font-size: 15px;" text="Costo total del paquete:" />
+            <Label fx:id="lblCostoPaquete" style="-fx-text-fill: #F0F4F5; -fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="\$0" />
+        </HBox>
+    </VBox>
+</HBox>

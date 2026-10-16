@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox spacing="20" style="-fx-background-color: #0E0E0F; -fx-padding: 20px;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.edu.poo.viewcontroller.SolicitudesViewController">
+
+    <ScrollPane fitToWidth="true" minWidth="430" prefWidth="480" style="-fx-background: transparent; -fx-background-color: transparent;">
+        <VBox spacing="12" style="-fx-background-color: #390007; -fx-padding: 18px; -fx-background-radius: 12px;">
+            <Label style="-fx-text-fill: #F0F4F5; -fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="Nueva Solicitud de Servicio" />
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-text-fill: #9BA0AB;" text="Código:" />
+                <Label fx:id="lblCodigoSolicitud" style="-fx-text-fill: #F0F4F5; -fx-font-weight: bold;" text="" />
+            </HBox>
+
+            <Label style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" text="CLIENTE *" />
+            <ComboBox fx:id="cmbCliente" maxWidth="Infinity" promptText="Seleccione un cliente" style="-fx-base: #0E0E0F; -fx-background-color: #0E0E0F; -fx-border-color: #9BA0AB; -fx-border-radius: 6px; -fx-background-radius: 6px;" />
+
+            <Label style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" text="SERVICIOS Y PAQUETES *" />
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <ComboBox fx:id="cmbElemento" maxWidth="Infinity" promptText="Servicio o paquete" style="-fx-base: #0E0E0F; -fx-background-color: #0E0E0F; -fx-border-color: #9BA0AB; -fx-border-radius: 6px; -fx-background-radius: 6px;" HBox.hgrow="ALWAYS" />
+                <Button onAction="#onAgregarElemento" style="-fx-background-color: #F0F4F5; -fx-text-fill: #390007; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 8px 16px; -fx-cursor: hand;" text="Agregar" />
+            </HBox>
+            <ListView fx:id="lstElementos" minHeight="100" prefHeight="120" style="-fx-base: #390007; -fx-control-inner-background: #0E0E0F; -fx-background-color: #0E0E0F; -fx-selection-bar: #9BA0AB; -fx-selection-bar-non-focused: #9BA0AB;" />
+            <Button onAction="#onQuitarElemento" style="-fx-background-color: #9BA0AB; -fx-text-fill: #0E0E0F; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 6px 14px; -fx-cursor: hand;" text="Quitar seleccionado" />
+            <Separator style="-fx-background-color: #9BA0AB;" />
+
+            <Label style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" text="FECHA PROGRAMADA (opcional)" />
+            <DatePicker fx:id="dpFechaProgramada" maxWidth="Infinity" promptText="Seleccione una fecha" style="-fx-base: #0E0E0F; -fx-background-color: #0E0E0F; -fx-border-color: #9BA0AB; -fx-border-radius: 6px; -fx-background-radius: 6px;" />
+
+            <Label style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" text="PRIORIDAD (opcional)" />
+            <ComboBox fx:id="cmbPrioridad" maxWidth="Infinity" promptText="Prioridad" style="-fx-base: #0E0E0F; -fx-background-color: #0E0E0F; -fx-border-color: #9BA0AB; -fx-border-radius: 6px; -fx-background-radius: 6px;" />
+
+            <Label style="-fx-text-fill: #9BA0AB; -fx-font-size: 11px; -fx-font-weight: bold;" text="OBSERVACIONES TÉCNICAS (opcional)" />
+            <TextArea fx:id="txtObservaciones" prefRowCount="3" promptText="Escriba las observaciones..." style="-fx-control-inner-background: #0E0E0F; -fx-text-fill: #F0F4F5; -fx-prompt-text-fill: #9BA0AB; -fx-background-color: #0E0E0F; -fx-border-color: #9BA0AB; -fx-border-radius: 6px; -fx-background-radius: 6px;" wrapText="true" />
+            <Separator style="-fx-background-color: #9BA0AB;" />
+
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label style="-fx-text-fill: #F0F4F5; -fx-font-size: 14px;" text="Costo estimado:" />
+                <Label fx:id="lblCostoEstimado" style="-fx-text-fill: #F0F4F5; -fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="\$0" />
+            </HBox>
+            <Button maxWidth="Infinity" onAction="#onRegistrarSolicitud" style="-fx-background-color: #F0F4F5; -fx-text-fill: #390007; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 10px 18px; -fx-cursor: hand;" text="Registrar Solicitud" />
+            <Label fx:id="lblMensaje" style="-fx-text-fill: #9BA0AB; -fx-font-style: italic;" text="" wrapText="true" />
+        </VBox>
+    </ScrollPane>
+
+    <VBox spacing="20" HBox.hgrow="ALWAYS">
+        <VBox spacing="12" style="-fx-background-color: #390007; -fx-padding: 18px; -fx-background-radius: 12px;" VBox.vgrow="ALWAYS">
+            <Label style="-fx-text-fill: #F0F4F5; -fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="Solicitudes Registradas" />
+            <TableView fx:id="tblSolicitudes" style="-fx-base: #390007; -fx-control-inner-background: #0E0E0F; -fx-background-color: #0E0E0F; -fx-selection-bar: #9BA0AB; -fx-selection-bar-non-focused: #9BA0AB; -fx-table-cell-border-color: transparent;" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colSolCodigo" prefWidth="90" text="Código" />
+                    <TableColumn fx:id="colSolCliente" prefWidth="170" text="Cliente" />
+                    <TableColumn fx:id="colSolFecha" prefWidth="130" text="Creada" />
+                    <TableColumn fx:id="colSolEstado" prefWidth="100" text="Estado" />
+                    <TableColumn fx:id="colSolTotal" prefWidth="110" text="Total" />
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                </columnResizePolicy>
+            </TableView>
+        </VBox>
+
+        <VBox spacing="12" style="-fx-background-color: #390007; -fx-padding: 18px; -fx-background-radius: 12px;">
+            <Label style="-fx-text-fill: #F0F4F5; -fx-font-size: 16px; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="Detalle de la Solicitud" />
+            <TextArea fx:id="txtDetalle" editable="false" prefHeight="190" style="-fx-control-inner-background: #0E0E0F; -fx-text-fill: #F0F4F5; -fx-background-color: #0E0E0F; -fx-border-color: #9BA0AB; -fx-border-radius: 6px; -fx-background-radius: 6px;" wrapText="true" />
+        </VBox>
+    </VBox>
+</HBox>
