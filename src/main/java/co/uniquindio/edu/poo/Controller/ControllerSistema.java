@@ -18,7 +18,7 @@ public class ControllerSistema {
         }
         return instancia;
     }
-
+  //esto es pal pull request
     public List<Cliente> obtenerClientes() {
         return sistema.getListaClientes();
     }
