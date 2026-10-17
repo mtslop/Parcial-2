@@ -1,5 +1,6 @@
 package co.uniquindio.edu.poo.viewcontroller;
 
+import co.uniquindio.edu.poo.Controller.ControllerSistema;
 import co.uniquindio.edu.poo.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,10 +37,13 @@ public class ServiciosViewController {
     private ObservableList<ServicioBase> listaServicios;
     private ObservableList<String> listaPersonalizados;
     private ServicioBase servicioSeleccionado;
+    private ControllerSistema controllerSistema;
 
     @FXML
     public void initialize() {
-        listaServicios = FXCollections.observableArrayList();
+        controllerSistema = ControllerSistema.obtenerInstancia();
+
+        listaServicios = FXCollections.observableArrayList(controllerSistema.obtenerCatalogo());
         listaPersonalizados = FXCollections.observableArrayList();
 
         colCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCodigo()));
@@ -63,15 +67,6 @@ public class ServiciosViewController {
                 actualizarPanelPersonalizacion();
             }
         });
-
-        cargarServiciosIniciales();
-    }
-
-    private void cargarServiciosIniciales() {
-        listaServicios.add(new MantenimientoPreventivo("SRV-001", "Limpieza general y cambio de pasta térmica"));
-        listaServicios.add(new MantenimientoCorrectivo("SRV-002", "Cambio de disco duro y reinstalación"));
-        listaServicios.add(new InstalacionRed("SRV-003", "Configuración de router y cableado estructurado"));
-        listaServicios.add(new RecuperacionInformacion("SRV-004", "Rescate de partición eliminada en HDD"));
     }
 
     @FXML
@@ -94,7 +89,9 @@ public class ServiciosViewController {
                 default -> throw new IllegalArgumentException("Tipo de servicio no válido");
             };
 
-            listaServicios.add(nuevoServicio);
+            controllerSistema.agregarServicio(nuevoServicio);
+            listaServicios.setAll(controllerSistema.obtenerCatalogo());
+
             lblMensajeCreacion.setText("¡Servicio creado con éxito!");
             limpiarFormularioCreacion();
 

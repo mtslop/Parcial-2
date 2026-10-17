@@ -1,10 +1,7 @@
 package co.uniquindio.edu.poo.viewcontroller;
 
-import co.uniquindio.edu.poo.model.Cliente;
-import co.uniquindio.edu.poo.model.ElementoTecnologico;
-import co.uniquindio.edu.poo.model.GestorSolicitudes;
-import co.uniquindio.edu.poo.model.SolicitudServicio;
-import co.uniquindio.edu.poo.model.TechSolutions;
+import co.uniquindio.edu.poo.Controller.ControllerSistema;
+import co.uniquindio.edu.poo.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,50 +13,32 @@ import java.util.List;
 
 public class SolicitudesViewController {
 
-    @FXML
-    private Label lblCodigoSolicitud;
-    @FXML
-    private ComboBox<Cliente> cmbCliente;
-    @FXML
-    private ComboBox<ElementoTecnologico> cmbElemento;
-    @FXML
-    private ListView<ElementoTecnologico> lstElementos;
-    @FXML
-    private DatePicker dpFechaProgramada;
-    @FXML
-    private ComboBox<String> cmbPrioridad;
-    @FXML
-    private TextArea txtObservaciones;
-    @FXML
-    private Label lblCostoEstimado;
-    @FXML
-    private Label lblMensaje;
+    @FXML private Label lblCodigoSolicitud;
+    @FXML private ComboBox<Cliente> cmbCliente;
+    @FXML private ComboBox<ElementoTecnologico> cmbElemento;
+    @FXML private ListView<ElementoTecnologico> lstElementos;
+    @FXML private DatePicker dpFechaProgramada;
+    @FXML private ComboBox<String> cmbPrioridad;
+    @FXML private TextArea txtObservaciones;
+    @FXML private Label lblCostoEstimado;
+    @FXML private Label lblMensaje;
 
-    @FXML
-    private TableView<SolicitudServicio> tblSolicitudes;
-    @FXML
-    private TableColumn<SolicitudServicio, String> colSolCodigo;
-    @FXML
-    private TableColumn<SolicitudServicio, String> colSolCliente;
-    @FXML
-    private TableColumn<SolicitudServicio, String> colSolFecha;
-    @FXML
-    private TableColumn<SolicitudServicio, String> colSolEstado;
-    @FXML
-    private TableColumn<SolicitudServicio, Double> colSolTotal;
-    @FXML
-    private TextArea txtDetalle;
+    @FXML private TableView<SolicitudServicio> tblSolicitudes;
+    @FXML private TableColumn<SolicitudServicio, String> colSolCodigo;
+    @FXML private TableColumn<SolicitudServicio, String> colSolCliente;
+    @FXML private TableColumn<SolicitudServicio, String> colSolFecha;
+    @FXML private TableColumn<SolicitudServicio, String> colSolEstado;
+    @FXML private TableColumn<SolicitudServicio, Double> colSolTotal;
+    @FXML private TextArea txtDetalle;
 
-    private TechSolutions empresa;
-    private GestorSolicitudes gestorSolicitudes;
+    private ControllerSistema controllerSistema;
 
     private ObservableList<ElementoTecnologico> elementosSeleccionados = FXCollections.observableArrayList();
     private ObservableList<SolicitudServicio> listaSolicitudes = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        empresa = TechSolutions.obtenerInstancia();
-        gestorSolicitudes = empresa.getGestor();
+        controllerSistema = ControllerSistema.obtenerInstancia();
 
         lstElementos.setItems(elementosSeleccionados);
         tblSolicitudes.setItems(listaSolicitudes);
@@ -80,21 +59,18 @@ public class SolicitudesViewController {
 
         cmbPrioridad.getItems().addAll("Baja", "Media", "Alta", "Urgente");
 
-        lblCodigoSolicitud.setText(empresa.generarCodigoSolicitud());
+        lblCodigoSolicitud.setText(controllerSistema.generarCodigoSolicitud());
     }
+
     private void cargarDatosIniciales() {
-        cmbCliente.setItems(FXCollections.observableArrayList(empresa.getListaClientes()));
+        cmbCliente.setItems(FXCollections.observableArrayList(controllerSistema.obtenerClientes()));
 
         ObservableList<ElementoTecnologico> elementosCatalogo = FXCollections.observableArrayList();
-        elementosCatalogo.addAll(empresa.getCatalogo());
-        elementosCatalogo.addAll(empresa.getListaPaquetes());
+        elementosCatalogo.addAll(controllerSistema.obtenerCatalogo());
+        elementosCatalogo.addAll(controllerSistema.obtenerPaquetes());
         cmbElemento.setItems(elementosCatalogo);
 
-        listaSolicitudes.addAll(empresa.getListaSolicitudes());
-    }
-
-    public void setGestorSolicitudes(GestorSolicitudes gestorSolicitudes) {
-        this.gestorSolicitudes = gestorSolicitudes;
+        listaSolicitudes.addAll(controllerSistema.obtenerSolicitudes());
     }
 
     @FXML
@@ -147,10 +123,11 @@ public class SolicitudesViewController {
             List<ElementoTecnologico> listaElementos = new ArrayList<>(elementosSeleccionados);
 
             SolicitudServicio nuevaSolicitud = new SolicitudServicio(codigo, cliente, listaElementos);
+            nuevaSolicitud.setFechaProgramada(fechaProgramada);
 
-            empresa.registrarSolicitud(nuevaSolicitud);
+            controllerSistema.registrarSolicitud(nuevaSolicitud);
 
-            listaSolicitudes.setAll(empresa.getListaSolicitudes());
+            listaSolicitudes.setAll(controllerSistema.obtenerSolicitudes());
             lblMensaje.setText("¡Solicitud registrada con éxito!");
             limpiarFormulario();
 
@@ -163,6 +140,9 @@ public class SolicitudesViewController {
 
     private void actualizarCostoEstimado() {
         double total = 0.0;
+        for (ElementoTecnologico el : elementosSeleccionados) {
+            total += el.calcularCosto();
+        }
         lblCostoEstimado.setText("$" + total);
     }
 
@@ -176,7 +156,7 @@ public class SolicitudesViewController {
     }
 
     private void limpiarFormulario() {
-        lblCodigoSolicitud.setText(empresa.generarCodigoSolicitud());
+        lblCodigoSolicitud.setText(controllerSistema.generarCodigoSolicitud());
         cmbCliente.getSelectionModel().clearSelection();
         cmbElemento.getSelectionModel().clearSelection();
         elementosSeleccionados.clear();

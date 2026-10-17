@@ -1,5 +1,6 @@
 package co.uniquindio.edu.poo.viewcontroller;
 
+import co.uniquindio.edu.poo.Controller.ControllerSistema;
 import co.uniquindio.edu.poo.model.Tecnico;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,10 +31,12 @@ public class TecnicosViewController {
     @FXML private CheckBox chkNuevoDisponible;
 
     private ObservableList<Tecnico> listaTecnicos;
+    private ControllerSistema controllerSistema;
 
     @FXML
     public void initialize() {
-        listaTecnicos = FXCollections.observableArrayList();
+        controllerSistema = ControllerSistema.obtenerInstancia();
+        listaTecnicos = FXCollections.observableArrayList(controllerSistema.obtenerTecnicos());
 
         ObservableList<String> especialidades = FXCollections.observableArrayList(
                 "Mantenimiento Preventivo",
@@ -51,14 +54,6 @@ public class TecnicosViewController {
                 "SRV-001 - Mantenimiento Oficina Principal",
                 "SRV-002 - Redes Laboratorio Sistemas"
         ));
-
-        cargarTecnicosIniciales();
-    }
-
-    private void cargarTecnicosIniciales() {
-        listaTecnicos.add(new Tecnico("TEC-01", "Carlos Pérez", "Mantenimiento Preventivo", "3101234567", true, 15000));
-        listaTecnicos.add(new Tecnico("TEC-02", "Ana Gómez", "Instalación de Redes", "3209876543", true, 25000));
-        listaTecnicos.add(new Tecnico("TEC-03", "Luis Torres", "Mantenimiento Correctivo", "3004567890", true, 20000));
     }
 
     @FXML
@@ -109,7 +104,8 @@ public class TecnicosViewController {
             double costoDesplazamiento = Double.parseDouble(costoStr);
 
             Tecnico nuevoTecnico = new Tecnico(id, nombre, especialidad, telefono, disponible, costoDesplazamiento);
-            listaTecnicos.add(nuevoTecnico);
+            controllerSistema.agregarTecnico(nuevoTecnico);
+            listaTecnicos.setAll(controllerSistema.obtenerTecnicos());
 
             lblEstado.setText("¡Técnico " + nombre + " registrado con éxito!");
 
